@@ -1,0 +1,9 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: configclient
+  cloud:
+    config:
+      uri: http://localhost:7000
+      name: ${spring.application.name}
