@@ -1,14 +1,18 @@
 
 spring:
+  application:
+    name: configserver
   cloud:
     config:
       server:
         git:
           uri: https://github.com/sddf2012/configserver
-          username: sddf2012
-          password: sh54410
-  application:
-    name: configserver
+          #克隆文件存放路径
+          basedir: /clone
+          search-paths: '{application}'
+        #native环境本地配置文件路径,该环境下不使用git,直接从本地路径查找    需配置spring.profiles.active=native
+        native:
+          search-locations: /native
 
 server:
   port: 7000

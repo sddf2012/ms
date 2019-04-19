@@ -7,3 +7,4 @@ spring:
     config:
       uri: http://localhost:7000
       name: ${spring.application.name}
+      fail-fast: true
