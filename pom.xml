@@ -7,6 +7,9 @@
     <modules>
         <module>configserver</module>
         <module>configclient</module>
+        <module>registryserver</module>
+        <module>adminserver</module>
+        <module>user</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -51,6 +54,18 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!--        <dependency>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-config</artifactId>
+                    <scope>compile</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-actuator</artifactId>
+                    <scope>compile</scope>
+                </dependency>-->
 
         <dependency>
             <groupId>org.projectlombok</groupId>

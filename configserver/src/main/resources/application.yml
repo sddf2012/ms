@@ -8,11 +8,39 @@ spring:
         git:
           uri: https://github.com/sddf2012/configserver
           #克隆文件存放路径
-          basedir: /clone
+          basedir: D:\workspace\myms\configserver\src\main\resources\localrepo
           search-paths: '{application}'
         #native环境本地配置文件路径,该环境下不使用git,直接从本地路径查找    需配置spring.profiles.active=native
         native:
           search-locations: /native
+  security:
+    user:
+      name: config
+      password: config
+  rabbitmq:
+    host: localhost
+    port: 5672
+#        health:
+#          repositories:
+#            healthcheck:
+#              name: healthcheck
+
 
 server:
   port: 7000
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    root: info

@@ -1,0 +1,37 @@
+server:
+  port: 7001
+
+spring:
+  application:
+    name: registryserver
+#  cloud:
+#    config:
+#      discovery:
+#        enabled: true
+#        service-id: configserver
+#      profile: dev
+#      label: master
+#      username: config
+#      password: config
+#      fail-fast: true
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+    fetch-registry: false
+    register-with-eureka: false
+  server:
+    enable-self-preservation: false
+
+logging:
+  level:
+    root: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -1,8 +1,8 @@
 server:
-  port: 8000
+  port: 7002
 spring:
   application:
-    name: configclient
+    name: adminserver
   cloud:
     config:
       name: ${spring.application.name}
@@ -14,11 +14,6 @@ spring:
       discovery:
         enabled: true
         service-id: configserver
-    bus:
-      enabled: true
-  rabbitmq:
-    host: localhost
-    port: 5672
 
 logging:
   level:
@@ -29,6 +24,7 @@ management:
     web:
       exposure:
         include: "*"
+
 eureka:
   instance:
     prefer-ip-address: true

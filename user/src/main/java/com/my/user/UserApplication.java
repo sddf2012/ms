@@ -1,25 +1,20 @@
-package com.my;
+package com.my.user;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.config.server.EnableConfigServer;
 
 /**
- * 整个代码文件描述
- *
- * @author 创建者中文名
- * date: 2019-1-10 16:43
+ * @author liu peng bo
+ * @date 2019/4/21
  */
 @Slf4j
 @SpringBootApplication
-@EnableConfigServer
 @EnableDiscoveryClient
-public class ConfigServerApplication {
+public class UserApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ConfigServerApplication.class, args);
-
-        log.info("config start!!!!");
+        SpringApplication.run(UserApplication.class, args);
+        log.info("UserApplication 启动成功!!!");
     }
 }
