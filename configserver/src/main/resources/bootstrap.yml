@@ -1,4 +1,5 @@
 
+
 spring:
   application:
     name: configserver
@@ -8,18 +9,21 @@ spring:
         git:
           uri: https://github.com/sddf2012/configserver
           #克隆文件存放路径
-          basedir: D:\workspace\myms\configserver\src\main\resources\localrepo
+          basedir: zzz/clone
           search-paths: '{application}'
         #native环境本地配置文件路径,该环境下不使用git,直接从本地路径查找    需配置spring.profiles.active=native
         native:
-          search-locations: /native
+          search-locations: classpath:/native/{application}
+
   security:
     user:
       name: config
       password: config
-  rabbitmq:
-    host: localhost
-    port: 5672
+  profiles:
+    active: native
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
 #        health:
 #          repositories:
 #            healthcheck:
