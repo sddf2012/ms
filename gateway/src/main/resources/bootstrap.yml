@@ -15,11 +15,20 @@ spring:
         enabled: true
         service-id: configserver
     gateway:
+      discovery:
+        locator:
+          enabled: true
       routes:
-        - id: after_route
-          uri: http://example.org
+        - id: user
           predicates:
-            - After=2017-01-20T17:42:47.789-07:00[America/Denver]
+            - Path=/user/**
+          uri: lb://user
+          filters:
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: forward:/gateway/fallback
+
 
 logging:
   level:
@@ -39,3 +48,14 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:7001/eureka
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 1000
