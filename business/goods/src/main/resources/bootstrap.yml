@@ -1,0 +1,49 @@
+#server:
+#  port: 8002
+#spring:
+#  application:
+#    name: goods
+#  cloud:
+#    config:
+#      name: ${spring.application.name}
+#      fail-fast: true
+#      username: config
+#      password: config
+#      profile: dev
+#      label: master
+#      discovery:
+#        enabled: true
+#        service-id: configserver
+server:
+  port: 8002
+spring:
+  application:
+    name: goods
+
+  zipkin:
+    service:
+      name: ${spring.application.name}
+    sender:
+      type: web
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      percentage: 1.0
+
+logging:
+  level:
+    root: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka

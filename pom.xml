@@ -6,11 +6,11 @@
     <packaging>pom</packaging>
     <modules>
         <module>configserver</module>
-        <module>configclient</module>
         <module>registryserver</module>
         <module>adminserver</module>
-        <module>user</module>
         <module>gateway</module>
+        <module>business</module>
+        <module>include</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
