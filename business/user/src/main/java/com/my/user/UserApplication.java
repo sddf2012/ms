@@ -15,7 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableDiscoveryClient
 @ComponentScan("com.my")
-@EnableFeignClients(basePackages = {"com.my.feign"})
+@EnableFeignClients(basePackages = {"com.my.include.feign"})
 public class UserApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserApplication.class, args);

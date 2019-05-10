@@ -14,6 +14,7 @@
     <modules>
         <module>feign</module>
         <module>domain</module>
+        <module>common</module>
     </modules>
 
 

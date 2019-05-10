@@ -1,7 +1,6 @@
-package com.my.feign.goods;
+package com.my.include.feign.user;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -10,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author liu peng bo
  * date: 2019/4/29 10:30
  */
-@FeignClient(name = "goods",path = "/goods")
-public interface GoodsFeign {
-    @RequestMapping("/get")
-    String get();
+@FeignClient(name = "user", path = "/user")
+public interface UserFeign {
+    @RequestMapping("/login")
+    String login();
 }
