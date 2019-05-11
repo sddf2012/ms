@@ -5,12 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>configserver</module>
-        <module>registryserver</module>
-        <module>adminserver</module>
-        <module>gateway</module>
+        <module>base-configserver</module>
+        <module>base-registry</module>
+        <module>base-adminserver</module>
+        <module>base-gateway</module>
         <module>business</module>
         <module>include</module>
+        <module>base-turbine</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

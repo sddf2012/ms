@@ -1,6 +1,7 @@
 package com.my.include.feign.user;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -11,6 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @FeignClient(name = "user", path = "/user")
 public interface UserFeign {
-    @RequestMapping("/login")
-    String login();
+    @RequestMapping("/getById/{id}")
+    String getById(@PathVariable String id);
 }

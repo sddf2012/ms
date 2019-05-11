@@ -23,15 +23,15 @@ public class UserController {
     @Autowired
     private GoodsFeign goodsFeign;
 
-    @GetMapping(value="/login")
-    public String login() throws InterruptedException {
+    @GetMapping(value = "/login")
+    public String login() {
         String a = goodsFeign.get();
         System.out.println(a);
         return "登录成功";
     }
 
-    @GetMapping(value="getAll")
-    public List<User> getAll() throws InterruptedException {
+    @GetMapping(value = "getAll")
+    public List<User> getAll() {
         List<User> list = new ArrayList<>();
         User user = new User();
         user.setId("1");
@@ -48,11 +48,7 @@ public class UserController {
     }
 
     @GetMapping("/getById/{id}")
-    public User getById(@PathVariable String id) throws InterruptedException {
-        User user = new User();
-        user.setId(id);
-        user.setCode("qq");
-        user.setName("阿斯");
-        return user;
+    public String getById(@PathVariable String id) {
+        return "hello " + id;
     }
 }

@@ -1,0 +1,30 @@
+server:
+  port: 7005
+spring:
+  application:
+    name: base-turbine
+
+logging:
+  level:
+    root: info
+  file: zzz/logfile/${spring.application.name}.log
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+
+turbine:
+  aggregator:
+    clusterConfig: default
+  appConfig: goods,user
+  clusterNameExpression: new String("default")
