@@ -1,5 +1,6 @@
 package com.my.user.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.my.include.feign.goods.GoodsFeign;
 import com.my.user.domain.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * 整个代码文件描述
@@ -30,21 +30,23 @@ public class UserController {
         return "登录成功";
     }
 
-    @GetMapping(value = "getAll")
-    public List<User> getAll() {
-        List<User> list = new ArrayList<>();
+    @GetMapping(value = "getUserAsync")
+    public String getUserAsync() {
+        return CompletableFuture.supplyAsync(() -> get()).thenApplyAsync(s -> JSONObject.toJSONString(s)).join();
+    }
+
+    @GetMapping(value = "getUser")
+    public String getUser() {
+        User user = get();
+        return JSONObject.toJSONString(user);
+    }
+
+    User get() {
         User user = new User();
         user.setId("1");
         user.setCode("qq");
         user.setName("阿斯");
-
-        User user2 = new User();
-        user2.setId("2");
-        user2.setCode("ww");
-        user2.setName("微软");
-        list.add(user);
-        list.add(user2);
-        return list;
+        return user;
     }
 
     @GetMapping("/getById/{id}")
