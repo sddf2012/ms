@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 /**
- * 整个代码文件描述
+ * 跨域问题
  *
  * @author liu peng bo
  * date: 2019/5/7 11:13
@@ -23,8 +23,8 @@ public class CrosConfig implements ResponseBodyAdvice {
 
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
-        ServletServerHttpResponse ssResp = (ServletServerHttpResponse)response;
-        ssResp.getServletResponse().addHeader("Access-Control-Allow-Origin","*");
+        ServletServerHttpResponse ssResp = (ServletServerHttpResponse) response;
+        ssResp.getServletResponse().addHeader("Access-Control-Allow-Origin", "*");
         return body;
     }
 }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.my.goods.repo.GoodsAttrMapper">
+  <resultMap id="BaseResultMap" type="com.my.goods.domain.entity.GoodsAttr">
+    <result column="attr_id" jdbcType="INTEGER" property="attrId" />
+    <result column="attr_code" jdbcType="VARCHAR" property="attrCode" />
+    <result column="attr_name" jdbcType="VARCHAR" property="attrName" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+
+  <insert id="insert" parameterType="com.my.goods.domain.entity.GoodsAttr">
+    <selectKey keyProperty="attrId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into g_attr (attr_code, attr_name, description, 
+      created_time, updated_time)
+    values (#{attrCode,jdbcType=VARCHAR}, #{attrName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.my.goods.domain.entity.GoodsAttr">
+    <selectKey keyProperty="attrId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into g_attr
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="attrCode != null">
+        attr_code,
+      </if>
+      <if test="attrName != null">
+        attr_name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="attrCode != null">
+        #{attrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="attrName != null">
+        #{attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

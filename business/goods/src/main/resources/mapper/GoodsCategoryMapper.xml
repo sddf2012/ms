@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.my.goods.repo.GoodsCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.my.goods.domain.entity.GoodsCategory">
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="category_code" jdbcType="VARCHAR" property="categoryCode" />
+    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="order_value" jdbcType="SMALLINT" property="orderValue" />
+    <result column="level" jdbcType="TINYINT" property="level" />
+    <result column="is_leaf" jdbcType="TINYINT" property="isLeaf" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="created_user" jdbcType="VARCHAR" property="createdUser" />
+    <result column="updated_user" jdbcType="VARCHAR" property="updatedUser" />
+  </resultMap>
+  <insert id="insert" parameterType="com.my.goods.domain.entity.GoodsCategory">
+    <selectKey keyProperty="categoryId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into g_category (category_code, category_name, parent_id, 
+      order_value, `level`, is_leaf, 
+      `status`, created_time, updated_time, 
+      created_user, updated_user)
+    values (#{categoryCode,jdbcType=VARCHAR}, #{categoryName,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
+      #{orderValue,jdbcType=SMALLINT}, #{level,jdbcType=TINYINT}, #{isLeaf,jdbcType=TINYINT}, 
+      #{status,jdbcType=TINYINT}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}, 
+      #{createdUser,jdbcType=VARCHAR}, #{updatedUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.my.goods.domain.entity.GoodsCategory">
+    <selectKey keyProperty="categoryId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into g_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="categoryCode != null">
+        category_code,
+      </if>
+      <if test="categoryName != null">
+        category_name,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="orderValue != null">
+        order_value,
+      </if>
+      <if test="level != null">
+        `level`,
+      </if>
+      <if test="isLeaf != null">
+        is_leaf,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+      <if test="createdUser != null">
+        created_user,
+      </if>
+      <if test="updatedUser != null">
+        updated_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="categoryCode != null">
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryName != null">
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="orderValue != null">
+        #{orderValue,jdbcType=SMALLINT},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=TINYINT},
+      </if>
+      <if test="isLeaf != null">
+        #{isLeaf,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdUser != null">
+        #{createdUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedUser != null">
+        #{updatedUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

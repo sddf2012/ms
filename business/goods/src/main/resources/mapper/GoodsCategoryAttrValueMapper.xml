@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.my.goods.repo.GoodsCategoryAttrValueMapper">
+  <resultMap id="BaseResultMap" type="com.my.goods.domain.entity.GoodsCategoryAttrValue">
+    <result column="cav_id" jdbcType="INTEGER" property="cavId" />
+    <result column="ca_id" jdbcType="INTEGER" property="caId" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="created_user" jdbcType="VARCHAR" property="createdUser" />
+    <result column="updated_user" jdbcType="VARCHAR" property="updatedUser" />
+  </resultMap>
+  <insert id="insert" parameterType="com.my.goods.domain.entity.GoodsCategoryAttrValue">
+    <selectKey keyProperty="cavId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into g_category_attr_value (ca_id, `value`, description, 
+      `status`, created_time, updated_time, 
+      created_user, updated_user)
+    values (#{caId,jdbcType=INTEGER}, #{value,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}, 
+      #{createdUser,jdbcType=VARCHAR}, #{updatedUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.my.goods.domain.entity.GoodsCategoryAttrValue">
+    <selectKey keyProperty="cavId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into g_category_attr_value
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="caId != null">
+        ca_id,
+      </if>
+      <if test="value != null">
+        `value`,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+      <if test="createdUser != null">
+        created_user,
+      </if>
+      <if test="updatedUser != null">
+        updated_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="caId != null">
+        #{caId,jdbcType=INTEGER},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdUser != null">
+        #{createdUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedUser != null">
+        #{updatedUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -3,17 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>my</artifactId>
-        <groupId>com</groupId>
+        <artifactId>ecommerce</artifactId>
+        <groupId>com.my.ecommerce</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>business</artifactId>
+    <artifactId>ecommerce-business</artifactId>
     <modules>
         <module>goods</module>
         <module>user</module>
     </modules>
+
+    <packaging>pom</packaging>
 
     <dependencies>
         <!--<dependency>
@@ -56,6 +58,23 @@
             <artifactId>spring-cloud-starter-zipkin</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
+        </dependency>
+
         <!--其他jar-->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -64,16 +83,15 @@
 
         <!--其他模块-->
         <dependency>
-            <groupId>com</groupId>
-            <artifactId>feign</artifactId>
+            <groupId>com.my.ecommerce</groupId>
+            <artifactId>ecommerce-feign</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com</groupId>
-            <artifactId>common</artifactId>
+            <groupId>com.my.ecommerce</groupId>
+            <artifactId>ecommerce-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
     </dependencies>
-
 </project>
