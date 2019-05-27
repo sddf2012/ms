@@ -1,11 +1,18 @@
-package com.my.goods.domain.entity;
+package com.my.goods.domain.vo;
 
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
+/**
+ * 整个代码文件描述
+ *
+ * @author liu peng bo
+ * date: 2019/5/27 14:12
+ */
 @Data
-public class GoodsCategory {
+public class GoodsCategoryRo {
     private Integer categoryId;
 
     private String categoryCode;
@@ -14,13 +21,11 @@ public class GoodsCategory {
 
     private Integer parentId;
 
-    private Integer orderValue;
+    private Short orderValue;
 
-    private Integer level;
+    private Byte level;
 
-    private Integer isLeaf;
-
-    private Integer status;
+    private Boolean isLeaf;
 
     private Date createdTime;
 
@@ -29,4 +34,6 @@ public class GoodsCategory {
     private String createdUser;
 
     private String updatedUser;
+
+    private List<GoodsCategoryRo> childs;
 }
