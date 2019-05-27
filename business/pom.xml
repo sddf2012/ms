@@ -84,11 +84,6 @@
         <!--其他模块-->
         <dependency>
             <groupId>com.my.ecommerce</groupId>
-            <artifactId>ecommerce-feign</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.my.ecommerce</groupId>
             <artifactId>ecommerce-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
