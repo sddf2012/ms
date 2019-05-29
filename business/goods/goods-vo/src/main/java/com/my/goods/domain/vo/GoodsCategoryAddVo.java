@@ -13,11 +13,13 @@ import java.util.List;
  */
 @Data
 public class GoodsCategoryAddVo {
-    @NotNull(message = "parentId不能为空")
+    @NotNull(message = "父节点id不能为空!")
     private Integer parentId;
 
+    @NotNull(message = "categoryCode不能为空!")
     private String categoryCode;
 
+    @NotNull(message = "categoryName不能为空!")
     private String categoryName;
 
     private String createdUser;

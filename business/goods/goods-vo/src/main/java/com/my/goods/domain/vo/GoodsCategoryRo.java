@@ -21,9 +21,9 @@ public class GoodsCategoryRo {
 
     private Integer parentId;
 
-    private Short orderValue;
+    private Integer orderValue;
 
-    private Byte level;
+    private Integer level;
 
     private Boolean isLeaf;
 

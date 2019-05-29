@@ -2,7 +2,7 @@ spring:
   # 数据库配置
   datasource:
     # ---------------基本链接信息---------------------------
-    url: jdbc:mysql://localhost:3306/ms_goods?autoReconnect=TRUE&useUnicode=true
+    url: jdbc:mysql://localhost:3306/ms_goods?serverTimezone=UTC
     username: root
     password: root
     # -----------------初始化大小，最小，最大----------------------------
@@ -35,6 +35,17 @@ spring:
     # 合并多个DruidDataSource的监控数据
     # useGlobalDataSourceStat: true
 
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
 mybatis:
   type-aliases-package: com.my.goods.domain.entity
   mapper-locations: classpath:mapper/*Mapper.xml
+
+swagger:
+  api:
+    title: goods api
+    description: 商品模块api
+    version: @project.version@

@@ -1,5 +1,6 @@
 package com.my.goods.service.impl;
 
+import com.my.goods.constants.GoodsCategoryConstants;
 import com.my.goods.domain.dto.GoodsCategoryAddDto;
 import com.my.goods.domain.entity.GoodsCategory;
 import com.my.goods.domain.vo.GoodsCategoryAddVo;
@@ -7,16 +8,19 @@ import com.my.goods.domain.vo.GoodsCategoryRo;
 import com.my.goods.domain.vo.GoodsCategoryUpdateVo;
 import com.my.goods.repo.GoodsCategoryMapper;
 import com.my.goods.service.GoodsCategoryManageService;
+import com.my.goods.utils.GoodsCategoryUtils;
 import com.my.include.common.constants.enums.LeafEnum;
 import com.my.include.common.constants.enums.ResultEnum;
 import com.my.include.common.constants.enums.StatusEnum;
 import com.my.include.common.exception.BusinessException;
+import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,6 +37,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Slf4j
+@Log4j
 public class GoodsCategoryManageServiceImpl implements GoodsCategoryManageService {
     @Autowired
     private GoodsCategoryMapper goodsCategoryMapper;
@@ -80,11 +85,11 @@ public class GoodsCategoryManageServiceImpl implements GoodsCategoryManageServic
     public void deleteByCategoryId(int categoryId) {
         GoodsCategoryRo result = selectAllById(categoryId);
         if (result != null) {
-            goodsCategoryMapper.updateUnValidByCategoryId(StatusEnum.UN_VALID.code, categoryId);
+            goodsCategoryMapper.updateStatusByCategoryId(StatusEnum.UN_VALID.code, categoryId);
             List<Integer> parentIds = new ArrayList<>();
             getParentIds(result, parentIds);
             if (!parentIds.isEmpty()) {
-                goodsCategoryMapper.updateUnValidByParentIds(StatusEnum.UN_VALID.code, parentIds);
+                goodsCategoryMapper.updateStatusByParentIds(StatusEnum.UN_VALID.code, parentIds);
             }
         }
     }
@@ -109,17 +114,19 @@ public class GoodsCategoryManageServiceImpl implements GoodsCategoryManageServic
 
     private void handleAddVO(GoodsCategoryAddVo addVo, Map<Integer, GoodsCategoryAddDto> map) {
         GoodsCategoryAddDto dto = map.get(addVo.getParentId());
+        int parentId = addVo.getParentId();
         boolean needUpdateParent = false;
         if (dto == null) {
-            GoodsCategory parent = goodsCategoryMapper.selectByCategoryId(addVo.getParentId());
+            GoodsCategory parent = findByCategoryId(parentId);
             if (parent == null) {
-                throw new BusinessException(ResultEnum.GOODS_ADD_CATEGORY);
+                log.error(ResultEnum.GOODS_ADD_CATEGORY_1 + " 入参 {}", addVo);
+                throw new BusinessException(ResultEnum.GOODS_ADD_CATEGORY_1);
             }
             dto = new GoodsCategoryAddDto();
             dto.setGoodsCategory(parent);
             int orderValue = 1;
             if (!LeafEnum.isLeaf(parent.getIsLeaf())) {
-                Integer maxOrderValue = goodsCategoryMapper.selectMaxOrderValueByParentId(addVo.getParentId());
+                Integer maxOrderValue = goodsCategoryMapper.selectMaxOrderValueByParentId(parentId);
                 orderValue = maxOrderValue == null ? 1 : maxOrderValue + 1;
             } else {
                 needUpdateParent = true;
@@ -127,10 +134,12 @@ public class GoodsCategoryManageServiceImpl implements GoodsCategoryManageServic
             dto.setChildNextOrderValue(orderValue);
             map.put(addVo.getParentId(), dto);
         }
+        //新增节点
         addSingle(addVo, dto.getGoodsCategory(), dto.getChildNextOrderValue());
+
         dto.setChildNextOrderValue(dto.getChildNextOrderValue() + 1);
         if (needUpdateParent) {
-            goodsCategoryMapper.updateLeafByCategory(LeafEnum.NOT_LEAF.code, addVo.getParentId());
+            goodsCategoryMapper.updateLeafByCategory(LeafEnum.NOT_LEAF.code, parentId);
         }
     }
 
@@ -149,46 +158,54 @@ public class GoodsCategoryManageServiceImpl implements GoodsCategoryManageServic
         goodsCategory.setParentId(parent.getCategoryId());
         goodsCategory.setCreatedUser(addVo.getCreatedUser());
         int categoryId = goodsCategoryMapper.insertSelective(goodsCategory);
-        goodsCategory.setCategoryId(categoryId);
+        //goodsCategory.setCategoryId(categoryId);
         if (leafEnum == LeafEnum.NOT_LEAF) {
+            //处理子节点
             addChilds(addVo.getChilds(), goodsCategory);
         }
     }
 
     private void addChilds(List<GoodsCategoryAddVo> childs, GoodsCategory parent) {
         int orderValue = 0;
-        childs.forEach(child -> addSingle(child, parent, orderValue + 1));
+        childs.forEach(child -> {
+            checkChild(child);
+            addSingle(child, parent, orderValue + 1);
+        });
+    }
+
+    private void checkChild(GoodsCategoryAddVo addVo) {
+        if (StringUtils.isEmpty(addVo.getCategoryCode())) {
+            log.error(ResultEnum.GOODS_ADD_CATEGORY_2 + " 入参 {}", addVo);
+            throw new BusinessException(ResultEnum.GOODS_ADD_CATEGORY_2);
+        }
+        if (StringUtils.isEmpty(addVo.getCategoryName())) {
+            log.error(ResultEnum.GOODS_ADD_CATEGORY_3 + " 入参 {}", addVo);
+            throw new BusinessException(ResultEnum.GOODS_ADD_CATEGORY_3);
+        }
     }
 
     @Override
-    public void updateCategory(GoodsCategoryUpdateVo updateVo) {
-        if (updateVo == null) {
+    public void updateCategory(List<GoodsCategoryUpdateVo> updateVos) {
+        if (CollectionUtils.isEmpty(updateVos)) {
             throw new BusinessException(ResultEnum.REQ_PARAM_NULL);
         }
-        GoodsCategory goodsCategory = goodsCategoryMapper.selectByCategoryId(updateVo.getCategoryId());
-        if (goodsCategory == null) {
-            throw new BusinessException(ResultEnum.GOODS_UPDATE_CATEGORY);
-        }
-        GoodsCategory update = new GoodsCategory();
-        boolean updateOrder = false;
-        if (!updateVo.getParentId().equals(goodsCategory.getParentId())) {
-            GoodsCategory newParent = goodsCategoryMapper.selectByCategoryId(updateVo.getParentId());
-            if (newParent == null) {
+        updateVos.forEach(updateVo -> {
+            GoodsCategory goodsCategory = goodsCategoryMapper.selectByCategoryId(updateVo.getCategoryId());
+            if (goodsCategory == null) {
                 throw new BusinessException(ResultEnum.GOODS_UPDATE_CATEGORY);
             }
-            update.setLevel(newParent.getLevel());
-            updateOrder = true;
-        }
-        if (!updateVo.getOrderValue().equals(goodsCategory.getOrderValue())) {
-            updateOrder = true;
-        }
-        update.setCategoryCode(updateVo.getCategoryCode());
-        update.setCategoryName(updateVo.getCategoryName());
-        update.setUpdatedUser(updateVo.getUpdatedUser());
-        goodsCategoryMapper.updateSelective(goodsCategory);
+            GoodsCategory updateCategory = new GoodsCategory();
+            BeanUtils.copyProperties(updateVo, updateCategory);
+            goodsCategoryMapper.updateSelective(updateCategory);
+        });
 
-        if (updateOrder) {
-            goodsCategoryMapper.updateOrderValueByParentId(updateVo.getParentId(), updateVo.getCategoryId(), updateVo.getOrderValue());
+    }
+
+    private GoodsCategory findByCategoryId(Integer categoryId) {
+        if (categoryId == GoodsCategoryConstants.ROOT_CATEGORY_ID) {
+            return GoodsCategoryUtils.virtualRoot();
+        } else {
+            return goodsCategoryMapper.selectByCategoryId(categoryId);
         }
     }
 

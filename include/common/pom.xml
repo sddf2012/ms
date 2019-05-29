@@ -11,10 +11,19 @@
 
     <artifactId>ecommerce-common</artifactId>
     <dependencies>
+        <!--spring boot-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <!--spring-->
+
         <!--swagger-->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -29,7 +38,6 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>27.0.1-jre</version>
         </dependency>
     </dependencies>
 

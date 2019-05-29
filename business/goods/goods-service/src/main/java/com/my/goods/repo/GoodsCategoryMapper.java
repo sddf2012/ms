@@ -6,32 +6,78 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface GoodsCategoryMapper {
-    int insert(GoodsCategory record);
-
-    int insertSelective(GoodsCategory record);
-
-    List<GoodsCategory> selectByParentId(@Param("parentId") int parentId);
-
-    GoodsCategory selectByCategoryId(@Param("categoryId") int categoryId);
-
-    int updateUnValidByCategoryId(@Param("status") int status, @Param("categoryId") int categoryId);
-
-    int updateUnValidByParentIds(@Param("status") int status, @Param("parentIds") List<Integer> parentIds);
-
-    int updateLeafByCategory(@Param("isLeaf") int isLeaf, @Param("categoryId") int categoryId);
-
-    Integer selectMaxOrderValueByParentId(@Param("parentId") int parentId);
-
-    int updateSelective(GoodsCategory record);
-
     /**
-     * parentId下节点的排序值大于orderValue的数据排序值加1，不包含指定的categoryId
+     * insert
      *
-     * @param parentId   父节点
-     * @param categoryId 排除的节点
-     * @param orderValue 排序值
+     * @param record entity
      * @return int
      */
-    int updateOrderValueByParentId(@Param("parentId") int parentId, @Param("categoryId") int categoryId, @Param("orderValue") int orderValue);
+    int insert(GoodsCategory record);
 
+    /**
+     * insertSelective
+     *
+     * @param record entity
+     * @return int
+     */
+    int insertSelective(GoodsCategory record);
+
+    /**
+     * 根据父节点查询分类
+     *
+     * @param parentId 父节点
+     * @return 分类集合
+     */
+    List<GoodsCategory> selectByParentId(@Param("parentId") int parentId);
+
+    /**
+     * 根据分类id查询分类
+     *
+     * @param categoryId 分类id
+     * @return 分类
+     */
+    GoodsCategory selectByCategoryId(@Param("categoryId") int categoryId);
+
+    /**
+     * 根据分类id更新分类状态为指定值
+     *
+     * @param status     分类状态
+     * @param categoryId 分类id
+     * @return 影响的数据
+     */
+    int updateStatusByCategoryId(@Param("status") int status, @Param("categoryId") int categoryId);
+
+    /**
+     * 根据父节点id更新分类状态为指定值
+     *
+     * @param status    分类状态
+     * @param parentIds 父节点id
+     * @return 影响的数据
+     */
+    int updateStatusByParentIds(@Param("status") int status, @Param("parentIds") List<Integer> parentIds);
+
+    /**
+     * 根据分类id更新分类叶子节点值
+     *
+     * @param isLeaf     是否为叶子节点
+     * @param categoryId 分类id
+     * @return 影响的数据
+     */
+    int updateLeafByCategory(@Param("isLeaf") int isLeaf, @Param("categoryId") int categoryId);
+
+    /**
+     * 查询父节点下的最大orderValue值
+     *
+     * @param parentId 父节点
+     * @return 最大orderValue值
+     */
+    Integer selectMaxOrderValueByParentId(@Param("parentId") int parentId);
+
+    /**
+     * updateSelective
+     *
+     * @param record entity
+     * @return 影响的数据
+     */
+    int updateSelective(GoodsCategory record);
 }

@@ -1,6 +1,7 @@
 package com.my.include.common.config;
 
 import io.swagger.annotations.Api;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -19,11 +20,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
+@EnableConfigurationProperties(SwaggerProperties.class)
 public class SwaggerConfig {
     @Bean
-    public Docket restApi() {
+    public Docket restApi(SwaggerProperties swaggerProperties) {
         return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
+                .apiInfo(apiInfo(swaggerProperties))
                 .useDefaultResponseMessages(false)
                 .enable(true)
                 .select()
@@ -32,14 +34,14 @@ public class SwaggerConfig {
                 .build();
     }
 
-    private ApiInfo apiInfo() {
+    private ApiInfo apiInfo(SwaggerProperties swaggerProperties) {
         return new ApiInfoBuilder()
-                .title("REST API of my")
-                .description("REST API of my")
-                .termsOfServiceUrl("http://www.wenewrs.cn/terms")
-                .license("License of wenewrs")
-                .licenseUrl("http://www.wenewrs.com/LICENSE")
-                .version("0.0.1")
+                .title(swaggerProperties.getTitle())
+                .description(swaggerProperties.getDescription())
+                /*.termsOfServiceUrl("http://www.my.cn/terms")
+                .license("License of my")
+                .licenseUrl("http://www.my.cn/LICENSE")*/
+                .version(swaggerProperties.getVersion())
                 .build();
     }
 }

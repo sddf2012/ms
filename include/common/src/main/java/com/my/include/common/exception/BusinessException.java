@@ -11,27 +11,21 @@ import lombok.Data;
  */
 @Data
 public class BusinessException extends RuntimeException {
-    private String code;
-    private ResultEnum result;
+    private ResultEnum resultEnum;
 
     public BusinessException(ResultEnum result) {
         super(result.msg);
-        this.result = result;
-    }
-
-    public BusinessException(ResultEnum result, String message) {
-        super(message);
-        this.result = result;
+        this.resultEnum = result;
     }
 
     public BusinessException(ResultEnum result, Throwable cause) {
         super(result.msg, cause);
-        this.result = result;
+        this.resultEnum = result;
     }
 
     public BusinessException(Throwable cause) {
         super(cause);
-        this.result = ResultEnum.ERROR;
+        this.resultEnum = ResultEnum.ERROR;
     }
 
 }

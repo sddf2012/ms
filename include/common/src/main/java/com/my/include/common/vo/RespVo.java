@@ -12,18 +12,20 @@ import lombok.Data;
 @Data
 public class RespVo<T> {
 
-    private String code;
+    private String respCode;
 
-    private String msg;
+    private String respMsg;
 
     private T data;
 
-    public RespVo() {
+    public RespVo(String respCode, String respMsg) {
+        this.respCode = respCode;
+        this.respMsg = respMsg;
     }
 
     public RespVo(ResultEnum resultEnum) {
-        this.code = resultEnum.code;
-        this.msg = resultEnum.msg;
+        this.respCode = resultEnum.code;
+        this.respMsg = resultEnum.msg;
     }
 
     public RespVo(ResultEnum resultEnum, T data) {
@@ -31,7 +33,26 @@ public class RespVo<T> {
         this.data = data;
     }
 
-    public static RespVo buildSuccess() {
+    public static <T> RespVo<T> buildSuccess() {
         return new RespVo<>(ResultEnum.SUCCESS);
     }
+
+    public static RespVo<String> buildStringSuccess() {
+        return new RespVo<>(ResultEnum.SUCCESS, "success");
+    }
+
+    public static <T> RespVo<T> buildSuccess(T data) {
+        RespVo<T> respVo = new RespVo<>(ResultEnum.SUCCESS);
+        respVo.setData(data);
+        return respVo;
+    }
+
+    public static <T> RespVo<T> buildFail(ResultEnum resultEnum) {
+        return new RespVo<>(resultEnum);
+    }
+
+    public static <T> RespVo<T> buildFail(String code, String msg) {
+        return new RespVo<>(code, msg);
+    }
+
 }
