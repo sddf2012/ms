@@ -1,6 +1,6 @@
 package com.my.include.common.exception;
 
-import com.my.include.common.constants.enums.ResultEnum;
+import com.my.include.common.constants.enums.RespMessageEnum;
 import lombok.Data;
 
 /**
@@ -11,21 +11,39 @@ import lombok.Data;
  */
 @Data
 public class BusinessException extends RuntimeException {
-    private ResultEnum resultEnum;
+    private RespMessageEnum respMessageEnum;
 
-    public BusinessException(ResultEnum result) {
+    private String errCode;
+
+    private String errMsg;
+
+    public BusinessException(RespMessageEnum result) {
         super(result.msg);
-        this.resultEnum = result;
+        this.errCode = result.code;
+        this.errMsg = result.msg;
     }
 
-    public BusinessException(ResultEnum result, Throwable cause) {
+    public BusinessException(RespMessageEnum result, Throwable cause) {
         super(result.msg, cause);
-        this.resultEnum = result;
+        this.errCode = result.code;
+    }
+
+    public BusinessException(String errCode, String errMsg) {
+        super(errMsg);
+        this.errCode = errCode;
+        this.errMsg = errMsg;
+    }
+
+    public BusinessException(String errCode, String errMsg, Throwable cause) {
+        super(cause);
+        this.errCode = errCode;
+        this.errMsg = errMsg;
     }
 
     public BusinessException(Throwable cause) {
         super(cause);
-        this.resultEnum = ResultEnum.ERROR;
+        this.errCode = RespMessageEnum.ERROR.code;
+        this.errMsg = RespMessageEnum.ERROR.msg;
     }
 
 }

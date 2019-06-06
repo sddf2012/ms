@@ -1,100 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.my.goods.repo.GoodsCategoryAttrMapper">
-  <resultMap id="BaseResultMap" type="com.my.goods.domain.entity.GoodsCategoryAttr">
-    <result column="ca_id" jdbcType="INTEGER" property="caId" />
-    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
-    <result column="attr_id" jdbcType="INTEGER" property="attrId" />
-    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
-    <result column="type" jdbcType="TINYINT" property="type" />
-    <result column="selected" jdbcType="TINYINT" property="selected" />
-    <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
-    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
-    <result column="created_user" jdbcType="VARCHAR" property="createdUser" />
-    <result column="updated_user" jdbcType="VARCHAR" property="updatedUser" />
-  </resultMap>
-  <insert id="insert" parameterType="com.my.goods.domain.entity.GoodsCategoryAttr">
-    <selectKey keyProperty="caId" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into g_category_attr (category_id, attr_id, parent_id, 
-      `type`, selected, `status`, 
-      created_time, updated_time, created_user, 
-      updated_user)
-    values (#{categoryId,jdbcType=INTEGER}, #{attrId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, 
-      #{type,jdbcType=TINYINT}, #{selected,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
-      #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}, #{createdUser,jdbcType=VARCHAR}, 
-      #{updatedUser,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.my.goods.domain.entity.GoodsCategoryAttr">
-    <selectKey keyProperty="caId" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into g_category_attr
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="categoryId != null">
-        category_id,
-      </if>
-      <if test="attrId != null">
-        attr_id,
-      </if>
-      <if test="parentId != null">
-        parent_id,
-      </if>
-      <if test="type != null">
-        `type`,
-      </if>
-      <if test="selected != null">
-        selected,
-      </if>
-      <if test="status != null">
-        `status`,
-      </if>
-      <if test="createdTime != null">
-        created_time,
-      </if>
-      <if test="updatedTime != null">
-        updated_time,
-      </if>
-      <if test="createdUser != null">
-        created_user,
-      </if>
-      <if test="updatedUser != null">
-        updated_user,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="categoryId != null">
-        #{categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="attrId != null">
-        #{attrId,jdbcType=INTEGER},
-      </if>
-      <if test="parentId != null">
-        #{parentId,jdbcType=INTEGER},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=TINYINT},
-      </if>
-      <if test="selected != null">
-        #{selected,jdbcType=TINYINT},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="createdTime != null">
-        #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        #{updatedTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createdUser != null">
-        #{createdUser,jdbcType=VARCHAR},
-      </if>
-      <if test="updatedUser != null">
-        #{updatedUser,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
+    <resultMap id="BaseResultMap" type="com.my.goods.domain.entity.GoodsCategoryAttr">
+        <result column="ca_id" jdbcType="INTEGER" property="caId"/>
+        <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
+        <result column="attr_id" jdbcType="INTEGER" property="attrId"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="selected" jdbcType="INTEGER" property="selected"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
+        <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime"/>
+        <result column="created_user" jdbcType="VARCHAR" property="createdUser"/>
+        <result column="updated_user" jdbcType="VARCHAR" property="updatedUser"/>
+    </resultMap>
+
+    <resultMap id="attrDetail" type="com.my.goods.domain.entity.extension.GoodsCategoryAttrDetail"
+               extends="BaseResultMap">
+        <association property="categoryName" >
+            <result column="category_name" property="categoryName"/>
+        </association>
+        <association property="attrName">
+            <result column="attr_name" property="attrName"/>
+        </association>
+    </resultMap>
+
+
+    <insert id="insert" parameterType="com.my.goods.domain.entity.GoodsCategoryAttr">
+        <selectKey keyProperty="caId" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into g_category_attr (category_id, attr_id, parent_id,
+        `type`, selected, `status`,
+        created_time, updated_time, created_user,
+        updated_user)
+        values (#{categoryId,jdbcType=INTEGER}, #{attrId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER},
+        #{type,jdbcType=TINYINT}, #{selected,jdbcType=TINYINT}, #{status,jdbcType=TINYINT},
+        #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}, #{createdUser,jdbcType=VARCHAR},
+        #{updatedUser,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.my.goods.domain.entity.GoodsCategoryAttr">
+        <selectKey keyProperty="caId" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into g_category_attr
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null">
+                category_id,
+            </if>
+            <if test="attrId != null">
+                attr_id,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="selected != null">
+                selected,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="updatedTime != null">
+                updated_time,
+            </if>
+            <if test="createdUser != null">
+                created_user,
+            </if>
+            <if test="updatedUser != null">
+                updated_user,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="attrId != null">
+                #{attrId,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="selected != null">
+                #{selected,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedTime != null">
+                #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdUser != null">
+                #{createdUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedUser != null">
+                #{updatedUser,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectByCategoryId" resultMap="attrDetail">
+    select ca.*,c.category_name,a.attr_name from g_category_attr ca
+    left join g_category c on c.category_id=ca.category_id
+    left join g_attr a on a.attr_id=ca.attr_id
+    where ca.category_id=#{categoryId}
+  </select>
 </mapper>

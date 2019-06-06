@@ -6,7 +6,7 @@
     <result column="ca_id" jdbcType="INTEGER" property="caId" />
     <result column="value" jdbcType="VARCHAR" property="value" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
     <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
     <result column="created_user" jdbcType="VARCHAR" property="createdUser" />
@@ -81,4 +81,7 @@
       </if>
     </trim>
   </insert>
+  <select id="selectByCaId" resultMap="BaseResultMap">
+    select * from g_category_attr_value where ca_id=#{caId}
+  </select>
 </mapper>

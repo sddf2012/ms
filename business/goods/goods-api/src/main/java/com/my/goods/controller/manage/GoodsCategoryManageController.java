@@ -1,8 +1,7 @@
 package com.my.goods.controller.manage;
 
-import com.my.goods.domain.vo.GoodsCategoryAddVo;
-import com.my.goods.domain.vo.GoodsCategoryRo;
-import com.my.goods.domain.vo.GoodsCategoryUpdateVo;
+import com.my.goods.domain.vo.GoodsCategoryResultVo;
+import com.my.goods.domain.vo.GoodsCategorySaveVo;
 import com.my.goods.service.GoodsCategoryManageService;
 import com.my.include.common.vo.RespVo;
 import io.swagger.annotations.Api;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,45 +31,36 @@ public class GoodsCategoryManageController {
 
     @GetMapping(value = "/searchAll")
     @ApiOperation(value = "查询全部商品分类")
-    public RespVo<List<GoodsCategoryRo>> searchAll() {
-        List<GoodsCategoryRo> list = categoryManageService.selectAllByParentId(0);
+    public RespVo<List<GoodsCategoryResultVo>> searchAll() {
+        List<GoodsCategoryResultVo> list = categoryManageService.selectAllByParentId(0);
         return RespVo.buildSuccess(list);
     }
 
-    @GetMapping(value = "/search/{categoryId}")
-    @ApiOperation(value = "查询指定节点下的子分类")
-    public RespVo<List<GoodsCategoryRo>> searchChilds(@PathVariable("categoryId") Integer categoryId) {
-        List<GoodsCategoryRo> list = categoryManageService.selectAllByParentId(categoryId);
+    @GetMapping(value = "/searchAll/{categoryId}")
+    @ApiOperation(value = "查询指定节点下的所有子分类")
+    public RespVo<List<GoodsCategoryResultVo>> searchChildren(@PathVariable("categoryId") Integer categoryId) {
+        List<GoodsCategoryResultVo> list = categoryManageService.selectAllByParentId(categoryId);
         return RespVo.buildSuccess(list);
     }
 
-    @PostMapping(value = "/addCategory")
-    @ApiOperation(value = "新增节点")
-    public RespVo<String> addCategory(@RequestBody @Valid List<GoodsCategoryAddVo> addVos) {
-        categoryManageService.addCategory(addVos);
-        return RespVo.buildStringSuccess();
+    @GetMapping(value = "/searchNext/{categoryId}")
+    @ApiOperation(value = "查询指定节点下的下一级子分类")
+    public RespVo<List<GoodsCategoryResultVo>> searchNextLevelChildren(@PathVariable("categoryId") Integer categoryId) {
+        List<GoodsCategoryResultVo> list = categoryManageService.selectOneByParentId(categoryId);
+        return RespVo.buildSuccess(list);
     }
 
-    @PostMapping(value = "/updateCategory")
-    @ApiOperation(value = "更新节点")
-    public RespVo<String> updateCategory(@RequestBody @Valid List<GoodsCategoryUpdateVo> updateVos) {
-        categoryManageService.updateCategory(updateVos);
-        return RespVo.buildStringSuccess();
+    @PostMapping(value = "/saveCategory")
+    @ApiOperation(value = "新增或更新节点")
+    public RespVo<GoodsCategoryResultVo> saveCategory(@RequestBody GoodsCategorySaveVo saveVo) {
+        GoodsCategoryResultVo goodsCategoryResultVo = categoryManageService.saveCategory(saveVo);
+        return RespVo.buildSuccess(goodsCategoryResultVo);
     }
 
     @GetMapping(value = "/deleteCategory/{categoryId}")
     @ApiOperation(value = "删除节点及其子节点")
     public RespVo<String> deleteCategory(@PathVariable("categoryId") Integer categoryId) {
         categoryManageService.deleteByCategoryId(categoryId);
-        return RespVo.buildStringSuccess();
-    }
-
-    @PostMapping(value = "/addCategory2")
-    @ApiOperation(value = "新增节点")
-    public RespVo<String> addCategory2(@RequestBody GoodsCategoryAddVo addVo) {
-        List<GoodsCategoryAddVo> list = new ArrayList<>();
-        list.add(addVo);
-        categoryManageService.addCategory(list);
         return RespVo.buildStringSuccess();
     }
 }

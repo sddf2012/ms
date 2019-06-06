@@ -12,7 +12,7 @@ import java.util.List;
  * date: 2019/5/27 14:12
  */
 @Data
-public class GoodsCategoryRo {
+public class GoodsCategoryResultVo {
     private Integer categoryId;
 
     private String categoryCode;
@@ -35,5 +35,5 @@ public class GoodsCategoryRo {
 
     private String updatedUser;
 
-    private List<GoodsCategoryRo> childs;
+    private List<GoodsCategoryResultVo> children;
 }

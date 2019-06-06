@@ -1,11 +1,11 @@
 package com.my.goods.domain.entity;
 
 import lombok.Data;
-
-import java.util.Date;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class GoodsAttr {
+@EqualsAndHashCode(callSuper = true)
+public class GoodsAttr extends BaseUpdated{
     private Integer attrId;
 
     private String attrCode;
@@ -14,7 +14,4 @@ public class GoodsAttr {
 
     private String description;
 
-    private Date createdTime;
-
-    private Date updatedTime;
 }

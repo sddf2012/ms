@@ -1,6 +1,6 @@
 package com.my.include.common.vo;
 
-import com.my.include.common.constants.enums.ResultEnum;
+import com.my.include.common.constants.enums.RespMessageEnum;
 import lombok.Data;
 
 /**
@@ -23,32 +23,32 @@ public class RespVo<T> {
         this.respMsg = respMsg;
     }
 
-    public RespVo(ResultEnum resultEnum) {
-        this.respCode = resultEnum.code;
-        this.respMsg = resultEnum.msg;
+    public RespVo(RespMessageEnum respMessageEnum) {
+        this.respCode = respMessageEnum.code;
+        this.respMsg = respMessageEnum.msg;
     }
 
-    public RespVo(ResultEnum resultEnum, T data) {
-        this(resultEnum);
+    public RespVo(RespMessageEnum respMessageEnum, T data) {
+        this(respMessageEnum);
         this.data = data;
     }
 
     public static <T> RespVo<T> buildSuccess() {
-        return new RespVo<>(ResultEnum.SUCCESS);
+        return new RespVo<>(RespMessageEnum.SUCCESS);
     }
 
     public static RespVo<String> buildStringSuccess() {
-        return new RespVo<>(ResultEnum.SUCCESS, "success");
+        return new RespVo<>(RespMessageEnum.SUCCESS, "success");
     }
 
     public static <T> RespVo<T> buildSuccess(T data) {
-        RespVo<T> respVo = new RespVo<>(ResultEnum.SUCCESS);
+        RespVo<T> respVo = new RespVo<>(RespMessageEnum.SUCCESS);
         respVo.setData(data);
         return respVo;
     }
 
-    public static <T> RespVo<T> buildFail(ResultEnum resultEnum) {
-        return new RespVo<>(resultEnum);
+    public static <T> RespVo<T> buildFail(RespMessageEnum respMessageEnum) {
+        return new RespVo<>(respMessageEnum);
     }
 
     public static <T> RespVo<T> buildFail(String code, String msg) {

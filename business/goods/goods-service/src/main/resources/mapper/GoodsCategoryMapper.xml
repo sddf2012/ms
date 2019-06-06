@@ -116,7 +116,7 @@
                 category_code=#{categoryCode},
             </if>
             <if test="categoryName!=null">
-                categoryName=#{category_name},
+                category_name=#{categoryName},
             </if>
             <if test="orderValue != null">
                 order_value=#{orderValue},
@@ -125,10 +125,10 @@
                 `level`=#{level},
             </if>
             <if test="isLeaf != null">
-                is_leaf#{isLeaf},
+                is_leaf=#{isLeaf},
             </if>
             <if test="status != null">
-                `status`#{status},
+                `status`=#{status},
             </if>
             <if test="updatedUser != null">
                 updated_user#{level},
@@ -161,5 +161,13 @@
     <select id="selectMaxOrderValueByParentId"
             resultType="int">
         select max(order_value) from g_category where parent_id=#{parentId}
+    </select>
+
+    <select id="selectCountByCategoryCode" resultType="int">
+        select count(1) from g_category where category_code=#{categoryCode} limit 1;
+    </select>
+
+    <select id="selectCountByCategoryCodeExcludeId" resultType="int">
+        select count(1) from g_category where category_code=#{categoryCode} and category_id!=#{categoryId} limit 1;
     </select>
 </mapper>

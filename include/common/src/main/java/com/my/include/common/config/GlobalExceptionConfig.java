@@ -1,6 +1,6 @@
 package com.my.include.common.config;
 
-import com.my.include.common.constants.enums.ResultEnum;
+import com.my.include.common.constants.enums.RespMessageEnum;
 import com.my.include.common.exception.BusinessException;
 import com.my.include.common.vo.RespVo;
 import lombok.extern.slf4j.Slf4j;
@@ -27,20 +27,20 @@ import static org.springframework.util.CollectionUtils.toIterator;
 public class GlobalExceptionConfig {
     @ExceptionHandler(BusinessException.class)
     public RespVo<String> handleBusinessException(BusinessException exception) {
-        return RespVo.buildFail(exception.getResultEnum());
+        return RespVo.buildFail(exception.getErrCode(),exception.getMessage());
     }
 
     @ExceptionHandler(ValidationException.class)
     public RespVo<String> handleConstraintViolationException(ValidationException ex) {
-        String message = ResultEnum.REQ_PARAM_VALIDATE.msg + "\n" + ex.getMessage();
+        String message = RespMessageEnum.REQ_PARAM_VALIDATE.msg + "\n" + ex.getMessage();
         log.error(message, ex);
-        return RespVo.buildFail(ResultEnum.REQ_PARAM_VALIDATE.code, message);
+        return RespVo.buildFail(RespMessageEnum.REQ_PARAM_VALIDATE.code, message);
     }
 
     @ExceptionHandler(Exception.class)
     public RespVo<String> handleException(HttpServletRequest request, Exception ex) {
         logError(request, ex);
-        return RespVo.buildFail(ResultEnum.ERROR.code, ex.toString());
+        return RespVo.buildFail(RespMessageEnum.ERROR.code, ex.getMessage());
     }
 
     private void logError(HttpServletRequest request, Exception e) {

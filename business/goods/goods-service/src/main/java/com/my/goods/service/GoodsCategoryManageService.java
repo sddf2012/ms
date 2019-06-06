@@ -1,8 +1,7 @@
 package com.my.goods.service;
 
-import com.my.goods.domain.vo.GoodsCategoryAddVo;
-import com.my.goods.domain.vo.GoodsCategoryRo;
-import com.my.goods.domain.vo.GoodsCategoryUpdateVo;
+import com.my.goods.domain.vo.GoodsCategoryResultVo;
+import com.my.goods.domain.vo.GoodsCategorySaveVo;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public interface GoodsCategoryManageService {
      * @param parentId 父节点
      * @return 分类集合
      */
-    List<GoodsCategoryRo> selectOneByParentId(int parentId);
+    List<GoodsCategoryResultVo> selectOneByParentId(int parentId);
 
     /**
      * 根据父节点查询分类,包含子节点
@@ -27,7 +26,7 @@ public interface GoodsCategoryManageService {
      * @param parentId 父节点
      * @return 分类集合
      */
-    List<GoodsCategoryRo> selectAllByParentId(int parentId);
+    List<GoodsCategoryResultVo> selectAllByParentId(int parentId);
 
     /**
      * 根据categoryId查询分类,不包含子节点
@@ -35,7 +34,7 @@ public interface GoodsCategoryManageService {
      * @param categoryId categoryId
      * @return 分类
      */
-    GoodsCategoryRo selectOneById(int categoryId);
+    GoodsCategoryResultVo selectOneById(int categoryId);
 
     /**
      * 根据categoryId查询分类,包含子节点
@@ -43,7 +42,7 @@ public interface GoodsCategoryManageService {
      * @param categoryId categoryId
      * @return 分类
      */
-    GoodsCategoryRo selectAllById(int categoryId);
+    GoodsCategoryResultVo selectAllById(int categoryId);
 
     /**
      * 删除分类
@@ -52,17 +51,12 @@ public interface GoodsCategoryManageService {
      */
     void deleteByCategoryId(int categoryId);
 
-    /**
-     * 新增分类
-     *
-     * @param addVos 分类集合
-     */
-    void addCategory(List<GoodsCategoryAddVo> addVos);
 
     /**
-     * 更新分类
+     * 新增或者更新分类
      *
-     * @param updateVos 分类集合
+     * @param saveVo 分类
+     * @return 分类
      */
-    void updateCategory(List<GoodsCategoryUpdateVo> updateVos);
+    GoodsCategoryResultVo saveCategory(GoodsCategorySaveVo saveVo);
 }

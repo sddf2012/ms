@@ -58,4 +58,7 @@
       </if>
     </trim>
   </insert>
+  <select id="selectByAttrId" resultType="string">
+    select attr_name from g_attr where attr_id=#{attrId}
+  </select>
 </mapper>

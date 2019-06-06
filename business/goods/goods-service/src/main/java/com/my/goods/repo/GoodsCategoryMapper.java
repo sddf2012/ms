@@ -63,7 +63,7 @@ public interface GoodsCategoryMapper {
      * @param categoryId 分类id
      * @return 影响的数据
      */
-    int updateLeafByCategory(@Param("isLeaf") int isLeaf, @Param("categoryId") int categoryId);
+    int updateLeafByCategoryId(@Param("isLeaf") int isLeaf, @Param("categoryId") int categoryId);
 
     /**
      * 查询父节点下的最大orderValue值
@@ -80,4 +80,22 @@ public interface GoodsCategoryMapper {
      * @return 影响的数据
      */
     int updateSelective(GoodsCategory record);
+
+    /**
+     * 判断code是否重复
+     *
+     * @param categoryCode 分类代码
+     * @return count
+     */
+    int selectCountByCategoryCode(@Param("categoryCode") String categoryCode);
+
+    /**
+     * 判断code是否重复，不包含指定的id
+     *
+     * @param categoryCode 分类代码
+     * @param categoryId   分类id
+     * @return count
+     */
+    int selectCountByCategoryCodeExcludeId(@Param("categoryCode") String categoryCode, @Param("categoryId") Integer categoryId);
+
 }
