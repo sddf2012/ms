@@ -11,5 +11,11 @@ public interface GoodsCategoryAttrMapper {
 
     int insertSelective(GoodsCategoryAttr record);
 
+    int updateSelective(GoodsCategoryAttr record);
+
+    GoodsCategoryAttr selectById(@Param("caId") int caId);
+
+    GoodsCategoryAttr selectByCategoryIdAndAttrId(@Param("categoryId") int categoryId,@Param("attrId") int attrId);
+
     List<GoodsCategoryAttrDetail> selectByCategoryId(@Param("categoryId") int categoryId);
 }

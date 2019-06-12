@@ -11,4 +11,6 @@ public interface GoodsCategoryAttrValueMapper {
     int insertSelective(GoodsCategoryAttrValue record);
 
     List<GoodsCategoryAttrValue> selectByCaId(@Param("caId") Integer caId);
+
+    List<GoodsCategoryAttrValue> selectByCaIdAndValue(@Param("caId") Integer caId,@Param("value") String value);
 }

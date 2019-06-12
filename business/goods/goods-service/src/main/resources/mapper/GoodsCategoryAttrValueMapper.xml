@@ -84,4 +84,8 @@
   <select id="selectByCaId" resultMap="BaseResultMap">
     select * from g_category_attr_value where ca_id=#{caId}
   </select>
+  <select id="selectByCaIdAndValue" resultMap="BaseResultMap">
+    select * from g_category_attr_value where ca_id=#{caId}
+    <if test="value!=null"> and value like concat('%',#{value},'%')</if>
+  </select>
 </mapper>

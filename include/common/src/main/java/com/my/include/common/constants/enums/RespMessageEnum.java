@@ -17,6 +17,7 @@ public enum RespMessageEnum {
 
     REQ_PARAM_NULL("00002", "请求参数不能为空!"),
     REQ_PARAM_VALIDATE("00003", "请求参数异常!"),
+    REQ_PARAM_VALIDATE2("00004", "请求参数异常:{0}"),
 
     /**
      * 商品模块
@@ -26,6 +27,10 @@ public enum RespMessageEnum {
     GOODS_CATEGORY_SAVE_3("10003", "保存分类失败:分类名称不能为空!"),
     GOODS_CATEGORY_SAVE_4("10004", "保存分类失败:分类代码:{0} 已存在!"),
     GOODS_CATEGORY_SAVE_5("10005", "保存分类失败:根据节点id:{0} 未查询到相应的分类!"),
+
+    GOODS_CA_SAVE_10("10010", "保存分类属性失败:根据id:{0} 未查询到相应的属性!"),
+    GOODS_CA_SAVE_11("10011", "保存分类属性失败:属性 {0} 已存在!"),
+
     ;
 
     /**

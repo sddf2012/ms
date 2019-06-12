@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,10 +27,10 @@ public class GoodsCategoryAttrValueManageController {
     @Autowired
     private GoodsCategoryAttrValueManageService attrValueManageService;
 
-    @ApiOperation(value = "根据分类属性id查询所有属性值")
+    @ApiOperation(value = "根据分类属性id即属性值查询相应属性")
     @GetMapping("/selectByCaId/{caId}")
-    public RespVo<List<GoodsCategoryAttrValueResultVo>> selectByCaId(@PathVariable("caId") Integer caId) {
-        List<GoodsCategoryAttrValueResultVo> attrValues = attrValueManageService.selectByCaId(caId);
+    public RespVo<List<GoodsCategoryAttrValueResultVo>> selectByCaId(@PathVariable("caId") Integer caId, @RequestParam(value = "value", required = false) String value) {
+        List<GoodsCategoryAttrValueResultVo> attrValues = attrValueManageService.selectByCaIdAndValue(caId,value);
         return RespVo.buildSuccess(attrValues);
     }
 }

@@ -13,6 +13,7 @@
     <modules>
         <module>goods</module>
         <module>user</module>
+        <module>system</module>
     </modules>
 
     <packaging>pom</packaging>

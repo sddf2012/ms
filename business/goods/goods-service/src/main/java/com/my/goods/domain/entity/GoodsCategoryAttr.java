@@ -1,5 +1,6 @@
 package com.my.goods.domain.entity;
 
+import com.my.include.common.entity.BaseUpdated;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -7,7 +8,7 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class GoodsCategoryAttr extends BaseUpdated{
+public class GoodsCategoryAttr extends BaseUpdated {
     private Integer caId;
 
     private Integer categoryId;

@@ -44,7 +44,9 @@ public class ValidateAop {
 
         Set<ConstraintViolation<Object>> validateResult = new HashSet<>();
         for (Object object : objects) {
-            handleArg(validateResult, object);
+            if (object != null) {
+                handleArg(validateResult, object);
+            }
         }
         if (!validateResult.isEmpty()) {
             throw new ConstraintViolationException(validateResult);

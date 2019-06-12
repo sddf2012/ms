@@ -94,13 +94,13 @@
 
                 注意，table里面很多参数都是对javaModelGenerator，context等元素的默认属性的一个复写；
         -->
-        <table tableName="g_attr" domainObjectName="GoodsAttr" enableCountByExample="false" enableUpdateByExample="false"
+        <!--<table tableName="g_attr" domainObjectName="GoodsAttr" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="false"/>
-            <!--mysql 配置-->
+            &lt;!&ndash;mysql 配置&ndash;&gt;
             <generatedKey column="attr_id" sqlStatement="Mysql" identity="true"/>
-            <!--oracle 配置-->
-            <!--<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>-->
+            &lt;!&ndash;oracle 配置&ndash;&gt;
+            &lt;!&ndash;<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>&ndash;&gt;
         </table>
 
         <table tableName="g_category" domainObjectName="GoodsCategory" enableCountByExample="false"
@@ -134,6 +134,12 @@
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="false"/>
             <generatedKey column="sa_id" sqlStatement="Mysql" identity="true"/>
+        </table>-->
+
+        <table tableName="sys_dictionary" domainObjectName="SysDictionary" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
 
     </context>

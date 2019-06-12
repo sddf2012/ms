@@ -33,6 +33,16 @@ public class GoodsCategoryAttrValueManageServiceImpl implements GoodsCategoryAtt
         }
     }
 
+    @Override
+    public List<GoodsCategoryAttrValueResultVo> selectByCaIdAndValue(Integer caId, String value) {
+        List<GoodsCategoryAttrValue> list = attrValueMapper.selectByCaIdAndValue(caId,value);
+        if (CollectionUtils.isEmpty(list)) {
+            return null;
+        } else {
+            return list.stream().map(this::entityToVo).collect(Collectors.toList());
+        }
+    }
+
     private GoodsCategoryAttrValueResultVo entityToVo(GoodsCategoryAttrValue attrValue) {
         if (attrValue == null) {
             return null;

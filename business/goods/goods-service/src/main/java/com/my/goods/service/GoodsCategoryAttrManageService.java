@@ -1,6 +1,7 @@
 package com.my.goods.service;
 
 import com.my.goods.domain.vo.GoodsCategoryAttrResultVo;
+import com.my.goods.domain.vo.GoodsCategoryAttrSaveVo;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ import java.util.List;
  */
 public interface GoodsCategoryAttrManageService {
     List<GoodsCategoryAttrResultVo> selectByCategoryId(Integer categoryId);
+
+    GoodsCategoryAttrResultVo saveCa(GoodsCategoryAttrSaveVo saveVo);
 }

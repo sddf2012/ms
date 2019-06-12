@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface GoodsCategoryAttrValueManageService {
     List<GoodsCategoryAttrValueResultVo> selectByCaId(Integer caId);
+
+    List<GoodsCategoryAttrValueResultVo> selectByCaIdAndValue(Integer caId,String value);
 }

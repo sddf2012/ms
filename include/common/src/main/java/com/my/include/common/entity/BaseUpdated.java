@@ -1,4 +1,4 @@
-package com.my.goods.domain.entity;
+package com.my.include.common.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -61,4 +61,13 @@
   <select id="selectByAttrId" resultType="string">
     select attr_name from g_attr where attr_id=#{attrId}
   </select>
+
+  <select id="selectByAttrName" resultMap="BaseResultMap">
+    select * from g_attr
+    <where>
+      <if test="attrName!=null">
+        attr_name like concat('%',#{attrName},'%')
+      </if>
+    </where>
+  </select>
 </mapper>
