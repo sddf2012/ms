@@ -12,4 +12,6 @@ public interface SysDictionaryMapper {
 
     List<SysDictionary> selectByCode(@Param("code") String code);
 
+    List<SysDictionary> selectByCodes(@Param("codes") List<String> codes);
+
 }

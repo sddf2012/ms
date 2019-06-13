@@ -42,4 +42,12 @@ public class GoodsCategoryAttrManageController {
         GoodsCategoryAttrResultVo resultVo = attrManageService.saveCa(saveVo);
         return RespVo.buildSuccess(resultVo);
     }
+
+    @ApiOperation(value = "根据id删除分类属性")
+    @GetMapping("/deleteCaById/{caId}")
+    public RespVo<String> deleteCaById(@PathVariable("caId") Integer caId) {
+       attrManageService.deleteCaById(caId);
+        return RespVo.buildStringSuccess();
+    }
+
 }

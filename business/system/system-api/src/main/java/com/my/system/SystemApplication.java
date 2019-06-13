@@ -15,7 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @Slf4j
 @EnableFeignClients(basePackages = {"com.my.system.feign"})
-@MapperScan("com.my.goods.repo")
+@MapperScan("com.my.system.repo")
 @ComponentScan({"com.my.system","com.my.include.common"})
 @SpringCloudApplication
 public class SystemApplication {

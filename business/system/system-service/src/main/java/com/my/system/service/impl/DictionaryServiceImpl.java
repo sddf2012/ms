@@ -33,6 +33,14 @@ public class DictionaryServiceImpl implements DictionaryService {
         return list.stream().map(this::entityToVo).collect(Collectors.toList());
     }
 
+    @Override
+    public List<SysDictionaryResultVo> getByCodes(List<String> codes) {
+        List<SysDictionary> list = dictionaryMapper.selectByCodes(codes);
+        if(CollectionUtils.isEmpty(list)){
+            return Collections.emptyList();
+        }
+        return list.stream().map(this::entityToVo).collect(Collectors.toList());
+    }
 
     private SysDictionaryResultVo entityToVo(SysDictionary entity) {
         if (entity == null) {

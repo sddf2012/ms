@@ -94,4 +94,9 @@
   <select id="selectByCode" resultMap="BaseResultMap">
     select * from sys_dictionary where code=#{code}
   </select>
+
+  <select id="selectByCodes" resultMap="BaseResultMap">
+    select * from sys_dictionary where code in
+    <foreach collection="codes" open="(" close=")" separator="," item="item">#{item}</foreach>
+  </select>
 </mapper>

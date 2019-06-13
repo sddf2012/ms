@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface DictionaryService {
     List<SysDictionaryResultVo> getByCode(String code);
+
+    List<SysDictionaryResultVo> getByCodes(List<String> codes);
 }

@@ -1,6 +1,7 @@
 package com.my.goods.service;
 
 import com.my.goods.domain.vo.GoodsCategoryAttrValueResultVo;
+import com.my.goods.domain.vo.GoodsCategoryAttrValueSaveVo;
 
 import java.util.List;
 
@@ -14,4 +15,8 @@ public interface GoodsCategoryAttrValueManageService {
     List<GoodsCategoryAttrValueResultVo> selectByCaId(Integer caId);
 
     List<GoodsCategoryAttrValueResultVo> selectByCaIdAndValue(Integer caId,String value);
+
+    int deleteById(Integer cavId);
+
+    GoodsCategoryAttrValueResultVo saveAttrValue(GoodsCategoryAttrValueSaveVo saveVo);
 }

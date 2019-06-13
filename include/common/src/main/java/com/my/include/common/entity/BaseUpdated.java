@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class BaseUpdated extends BaseCreated {
-    private Date updatedUser;
+    private String updatedUser;
 
     private Date updatedTime;
 }

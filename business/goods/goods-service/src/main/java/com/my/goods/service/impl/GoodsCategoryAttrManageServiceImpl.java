@@ -41,6 +41,8 @@ public class GoodsCategoryAttrManageServiceImpl implements GoodsCategoryAttrMana
         }
     }
 
+
+
     private GoodsCategoryAttrResultVo updateCa(GoodsCategoryAttrSaveVo saveVo) {
         String errMsg;
         int caId = saveVo.getCaId();
@@ -51,7 +53,7 @@ public class GoodsCategoryAttrManageServiceImpl implements GoodsCategoryAttrMana
         }
         entity.setType(saveVo.getType());
         entity.setSelected(saveVo.getSelected());
-
+        entity.setUpdatedUser(saveVo.getOperator());
         goodsCategoryAttrMapper.updateSelective(entity);
         return entityToVo(entity);
     }
@@ -75,6 +77,11 @@ public class GoodsCategoryAttrManageServiceImpl implements GoodsCategoryAttrMana
         goodsCategoryAttrMapper.insertSelective(attr);
         return entityToVo(attr);
 
+    }
+
+    @Override
+    public void deleteCaById(Integer caId) {
+        goodsCategoryAttrMapper.deleteCaById(caId);
     }
 
     private GoodsCategoryAttrResultVo entityToVo(GoodsCategoryAttr attr) {

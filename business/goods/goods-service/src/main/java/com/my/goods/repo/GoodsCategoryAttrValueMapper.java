@@ -10,7 +10,17 @@ public interface GoodsCategoryAttrValueMapper {
 
     int insertSelective(GoodsCategoryAttrValue record);
 
+    int updateSelective(GoodsCategoryAttrValue record);
+
+    GoodsCategoryAttrValue selectByCavId(@Param("cavId") Integer cavId);
+
+    int selectByCaIdAndValueExcludeCavid(@Param("caId") Integer caId,@Param("value") String value,@Param("cavId") Integer cavId);
+
     List<GoodsCategoryAttrValue> selectByCaId(@Param("caId") Integer caId);
 
-    List<GoodsCategoryAttrValue> selectByCaIdAndValue(@Param("caId") Integer caId,@Param("value") String value);
+    List<GoodsCategoryAttrValue> selectByCaIdAndValueLike(@Param("caId") Integer caId, @Param("value") String value);
+
+    GoodsCategoryAttrValue selectByCaIdAndValue(@Param("caId") Integer caId, @Param("value") String value);
+
+    int deleteById(@Param("cavId")Integer cavId);
 }

@@ -15,4 +15,6 @@ public interface GoodsCategoryAttrManageService {
     List<GoodsCategoryAttrResultVo> selectByCategoryId(Integer categoryId);
 
     GoodsCategoryAttrResultVo saveCa(GoodsCategoryAttrSaveVo saveVo);
+
+    void deleteCaById(Integer caId);
 }

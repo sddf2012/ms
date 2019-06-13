@@ -119,8 +119,8 @@
             <if test="selected!=null">
                 selected=#{selected},
             </if>
-            <if test="operator!=null">
-                updated_user=#{operator},
+            <if test="updatedUser!=null">
+                updated_user=#{updatedUser},
             </if>
         </set>
         where ca_id=#{caId}
@@ -140,4 +140,8 @@
     <select id="selectByCategoryIdAndAttrId" resultMap="BaseResultMap">
        select * from g_category_attr where category_id=#{categoryId} and attr_id=#{attrId}
     </select>
+
+    <delete id="deleteCaById" parameterType="int">
+        delete from g_category_attr where ca_id=#{caId}
+    </delete>
 </mapper>

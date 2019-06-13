@@ -18,4 +18,6 @@ public interface GoodsCategoryAttrMapper {
     GoodsCategoryAttr selectByCategoryIdAndAttrId(@Param("categoryId") int categoryId,@Param("attrId") int attrId);
 
     List<GoodsCategoryAttrDetail> selectByCategoryId(@Param("categoryId") int categoryId);
+
+    int deleteCaById(@Param("caId") int caId);
 }

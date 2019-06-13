@@ -84,8 +84,38 @@
   <select id="selectByCaId" resultMap="BaseResultMap">
     select * from g_category_attr_value where ca_id=#{caId}
   </select>
-  <select id="selectByCaIdAndValue" resultMap="BaseResultMap">
+  <select id="selectByCaIdAndValueLike" resultMap="BaseResultMap">
     select * from g_category_attr_value where ca_id=#{caId}
     <if test="value!=null"> and value like concat('%',#{value},'%')</if>
+  </select>
+
+  <select id="selectByCavId" resultMap="BaseResultMap">
+    select * from g_category_attr_value where cav_id=#{cavId}
+  </select>
+
+  <select id="selectByCaIdAndValueExcludeCavid" resultType="int">
+    select count(1) from g_category_attr_value where ca_id=#{caId} and value=#{value} and cav_id!=#{cavId}
+  </select>
+
+  <delete id="deleteById" parameterType="int">
+    delete from g_category_attr_value where cav_id=#{cavId}
+  </delete>
+
+  <update id="updateSelective" parameterType="com.my.goods.domain.entity.GoodsCategoryAttrValue">
+        update g_category_attr_value
+    <set>
+      <if test="value!=null">
+      value =#{value},
+      </if>
+      <if test="updaterUser!=null">
+        update_user =#{updaterUser},
+      </if>
+    </set>
+    where cav_id=#{cavId}
+  </update>
+
+  <select id="selectByCaIdAndValue" resultMap="BaseResultMap">
+    select * from g_category_attr_value where ca_id=#{caId}
+    and value =#{value}
   </select>
 </mapper>
