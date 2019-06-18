@@ -133,6 +133,13 @@
     where ca.category_id=#{categoryId}
   </select>
 
+    <select id="selectByCategoryIdPage" resultMap="attrDetail">
+    select ca.*,c.category_name,a.attr_name from g_category_attr ca
+    left join g_category c on c.category_id=ca.category_id
+    left join g_attr a on a.attr_id=ca.attr_id
+    where ca.category_id=#{categoryId}
+  </select>
+
     <select id="selectById" resultMap="BaseResultMap">
        select * from g_category_attr where ca_id=#{caId}
     </select>

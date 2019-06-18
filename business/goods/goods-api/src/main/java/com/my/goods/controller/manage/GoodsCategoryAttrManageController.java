@@ -3,6 +3,7 @@ package com.my.goods.controller.manage;
 import com.my.goods.domain.vo.GoodsCategoryAttrResultVo;
 import com.my.goods.domain.vo.GoodsCategoryAttrSaveVo;
 import com.my.goods.service.GoodsCategoryAttrManageService;
+import com.my.include.common.vo.PageResp;
 import com.my.include.common.vo.RespVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -33,6 +35,13 @@ public class GoodsCategoryAttrManageController {
     @GetMapping("/getGoodsCategoryAttr/{categoryId}")
     public RespVo<List<GoodsCategoryAttrResultVo>> getGoodsCategoryAttr(@PathVariable("categoryId") Integer categoryId) {
         List<GoodsCategoryAttrResultVo> detail = attrManageService.selectByCategoryId(categoryId);
+        return RespVo.buildSuccess(detail);
+    }
+
+    @ApiOperation(value = "根据分类代码查询分类属性")
+    @GetMapping("/getGoodsCategoryAttrPage/{categoryId}")
+    public RespVo<PageResp<GoodsCategoryAttrResultVo>> getGoodsCategoryAttrPage(@PathVariable("categoryId") Integer categoryId, @RequestParam int pageNum, @RequestParam int pageSize) {
+        PageResp<GoodsCategoryAttrResultVo> detail = attrManageService.selectByCategoryIdPage(categoryId,pageNum,pageSize);
         return RespVo.buildSuccess(detail);
     }
 

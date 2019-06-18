@@ -2,6 +2,7 @@ package com.my.goods.service;
 
 import com.my.goods.domain.vo.GoodsCategoryAttrResultVo;
 import com.my.goods.domain.vo.GoodsCategoryAttrSaveVo;
+import com.my.include.common.vo.PageResp;
 
 import java.util.List;
 
@@ -13,6 +14,8 @@ import java.util.List;
  */
 public interface GoodsCategoryAttrManageService {
     List<GoodsCategoryAttrResultVo> selectByCategoryId(Integer categoryId);
+
+    PageResp<GoodsCategoryAttrResultVo> selectByCategoryIdPage(Integer categoryId, int pageNum, int pageSize);
 
     GoodsCategoryAttrResultVo saveCa(GoodsCategoryAttrSaveVo saveVo);
 

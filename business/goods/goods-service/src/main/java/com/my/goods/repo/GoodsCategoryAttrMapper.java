@@ -19,5 +19,7 @@ public interface GoodsCategoryAttrMapper {
 
     List<GoodsCategoryAttrDetail> selectByCategoryId(@Param("categoryId") int categoryId);
 
+    List<GoodsCategoryAttrDetail> selectByCategoryIdPage(@Param("categoryId") int categoryId,@Param("pageNum") int pageNum,@Param("pageSize") int pageSize);
+
     int deleteCaById(@Param("caId") int caId);
 }

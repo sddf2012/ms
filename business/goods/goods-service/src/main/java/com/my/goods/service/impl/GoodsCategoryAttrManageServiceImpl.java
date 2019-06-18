@@ -1,5 +1,6 @@
 package com.my.goods.service.impl;
 
+import com.github.pagehelper.Page;
 import com.my.goods.domain.entity.GoodsCategoryAttr;
 import com.my.goods.domain.entity.extension.GoodsCategoryAttrDetail;
 import com.my.goods.domain.vo.GoodsCategoryAttrResultVo;
@@ -8,6 +9,7 @@ import com.my.goods.repo.GoodsCategoryAttrMapper;
 import com.my.goods.service.GoodsCategoryAttrManageService;
 import com.my.include.common.constants.enums.RespMessageEnum;
 import com.my.include.common.exception.BusinessException;
+import com.my.include.common.vo.PageResp;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,6 +41,14 @@ public class GoodsCategoryAttrManageServiceImpl implements GoodsCategoryAttrMana
         } else {
             return addCa(saveVo);
         }
+    }
+
+    @Override
+    public PageResp<GoodsCategoryAttrResultVo> selectByCategoryIdPage(Integer categoryId,int pageNum,int pageSize) {
+        Page<GoodsCategoryAttrDetail> list = (Page<GoodsCategoryAttrDetail>) goodsCategoryAttrMapper.selectByCategoryIdPage(categoryId,pageNum,pageSize);
+        return new PageResp<GoodsCategoryAttrResultVo>(list,this::entityToVo);
+
+
     }
 
 
