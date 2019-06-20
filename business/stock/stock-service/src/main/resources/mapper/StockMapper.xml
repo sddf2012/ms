@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.my.stock.repo.StockMapper">
+  <resultMap id="BaseResultMap" type="com.my.stock.domain.entity.Stock">
+    <result column="stock_id" jdbcType="INTEGER" property="stockId" />
+    <result column="item_id" jdbcType="INTEGER" property="itemId" />
+    <result column="total" jdbcType="INTEGER" property="total" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.my.stock.domain.entity.Stock">
+    <selectKey keyProperty="stockId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into s_stock (item_id, total, created_time, 
+      updated_time)
+    values (#{itemId,jdbcType=INTEGER}, #{total,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{updatedTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.my.stock.domain.entity.Stock">
+    <selectKey keyProperty="stockId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into s_stock
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectByIds" resultMap="BaseResultMap">
+    select * from s_stock where item_id in
+    <foreach collection="ids" item="id" separator="," open="(" close=")">#{id}</foreach>
+  </select>
+</mapper>

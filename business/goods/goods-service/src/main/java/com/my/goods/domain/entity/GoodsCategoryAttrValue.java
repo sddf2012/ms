@@ -1,6 +1,6 @@
 package com.my.goods.domain.entity;
 
-import com.my.include.common.entity.BaseUpdated;
+import com.my.include.common.domain.entity.BaseUpdated;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

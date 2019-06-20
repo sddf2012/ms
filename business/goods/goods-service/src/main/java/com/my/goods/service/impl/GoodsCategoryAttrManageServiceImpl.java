@@ -9,7 +9,7 @@ import com.my.goods.repo.GoodsCategoryAttrMapper;
 import com.my.goods.service.GoodsCategoryAttrManageService;
 import com.my.include.common.constants.enums.RespMessageEnum;
 import com.my.include.common.exception.BusinessException;
-import com.my.include.common.vo.PageResp;
+import com.my.include.common.domain.vo.PageResp;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -44,11 +44,9 @@ public class GoodsCategoryAttrManageServiceImpl implements GoodsCategoryAttrMana
     }
 
     @Override
-    public PageResp<GoodsCategoryAttrResultVo> selectByCategoryIdPage(Integer categoryId,int pageNum,int pageSize) {
+    public PageResp<GoodsCategoryAttrResultVo> selectByCategoryIdPage(Integer categoryId, int pageNum, int pageSize) {
         Page<GoodsCategoryAttrDetail> list = (Page<GoodsCategoryAttrDetail>) goodsCategoryAttrMapper.selectByCategoryIdPage(categoryId,pageNum,pageSize);
-        return new PageResp<GoodsCategoryAttrResultVo>(list,this::entityToVo);
-
-
+        return new PageResp<>(list,this::entityToVo);
     }
 
 

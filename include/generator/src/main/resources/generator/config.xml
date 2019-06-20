@@ -134,12 +134,24 @@
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="false"/>
             <generatedKey column="sa_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table tableName="g_item" domainObjectName="Item" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="item_id" sqlStatement="Mysql" identity="true"/>
         </table>-->
 
-        <table tableName="sys_dictionary" domainObjectName="SysDictionary" enableCountByExample="false" enableUpdateByExample="false"
+        <!--<table tableName="sys_dictionary" domainObjectName="SysDictionary" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="false"/>
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>-->
+
+        <table tableName="s_stock" domainObjectName="Stock" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="stock_id" sqlStatement="Mysql" identity="true"/>
         </table>
 
     </context>

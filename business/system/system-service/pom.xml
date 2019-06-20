@@ -19,7 +19,7 @@
 
         <dependency>
             <groupId>com.my.ecommerce</groupId>
-            <artifactId>ecommerce-common</artifactId>
+            <artifactId>ecommerce-common-server</artifactId>
         </dependency>
 
         <dependency>

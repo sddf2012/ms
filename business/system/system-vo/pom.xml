@@ -11,5 +11,12 @@
 
     <artifactId>ecommerce-system-vo</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.my.ecommerce</groupId>
+            <artifactId>ecommerce-common-domain</artifactId>
+        </dependency>
+    </dependencies>
+
 
 </project>

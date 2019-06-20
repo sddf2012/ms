@@ -1,6 +1,6 @@
 package com.my.system.controller;
 
-import com.my.include.common.vo.RespVo;
+import com.my.include.common.domain.vo.RespVo;
 import com.my.system.domain.vo.SysDictionaryResultVo;
 import com.my.system.service.DictionaryService;
 import io.swagger.annotations.Api;

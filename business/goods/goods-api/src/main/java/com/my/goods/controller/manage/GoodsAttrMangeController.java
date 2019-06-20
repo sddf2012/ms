@@ -2,7 +2,7 @@ package com.my.goods.controller.manage;
 
 import com.my.goods.domain.vo.GoodsAttrResultVo;
 import com.my.goods.service.GoodsAttrMangeService;
-import com.my.include.common.vo.RespVo;
+import com.my.include.common.domain.vo.RespVo;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

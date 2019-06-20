@@ -2,7 +2,7 @@ package com.my.goods.service;
 
 import com.my.goods.domain.vo.GoodsCategoryAttrResultVo;
 import com.my.goods.domain.vo.GoodsCategoryAttrSaveVo;
-import com.my.include.common.vo.PageResp;
+import com.my.include.common.domain.vo.PageResp;
 
 import java.util.List;
 

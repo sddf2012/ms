@@ -18,4 +18,20 @@
         <module>goods-vo</module>
         <module>goods-api</module>
     </modules>
+
+    <dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.my.ecommerce</groupId>
+            <artifactId>ecommerce-goods-vo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.my.ecommerce</groupId>
+            <artifactId>ecommerce-goods-service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+    </dependencyManagement>
 </project>

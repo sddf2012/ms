@@ -3,7 +3,7 @@ package com.my.goods.controller.manage;
 import com.my.goods.domain.vo.GoodsCategoryResultVo;
 import com.my.goods.domain.vo.GoodsCategorySaveVo;
 import com.my.goods.service.GoodsCategoryManageService;
-import com.my.include.common.vo.RespVo;
+import com.my.include.common.domain.vo.RespVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

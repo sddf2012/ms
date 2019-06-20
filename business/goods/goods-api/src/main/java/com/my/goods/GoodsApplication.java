@@ -14,9 +14,9 @@ import org.springframework.context.annotation.ComponentScan;
  * date: 2019/4/29 10:06
  */
 @SpringCloudApplication
-@EnableFeignClients(basePackages = {"com.my.goods.feign"})
+@EnableFeignClients(basePackages = {"com.my.*.feign"})
 @MapperScan("com.my.goods.repo")
-@ComponentScan({"com.my.goods","com.my.include.common"})
+@ComponentScan({"com.my.goods","com.my.include.common","com.my.*.feign.callback"})
 @Slf4j
 public class GoodsApplication {
     public static void main(String[] args) {

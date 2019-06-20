@@ -81,24 +81,10 @@
             <artifactId>fastjson</artifactId>
         </dependency>
 
-
         <!--本项目模块-->
         <dependency>
             <groupId>com.my.ecommerce</groupId>
             <artifactId>ecommerce-goods-service</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.my.ecommerce</groupId>
-            <artifactId>ecommerce-goods-vo</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.my.ecommerce</groupId>
-            <artifactId>ecommerce-goods-feign</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

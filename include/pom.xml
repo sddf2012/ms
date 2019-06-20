@@ -12,8 +12,9 @@
     <artifactId>ecommerce-include</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>common</module>
+        <module>common-server</module>
         <module>generator</module>
+        <module>common-domain</module>
     </modules>
 
 </project>
