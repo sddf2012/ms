@@ -46,7 +46,7 @@ public class GoodsCategoryAttrManageServiceImpl implements GoodsCategoryAttrMana
     @Override
     public PageResp<GoodsCategoryAttrResultVo> selectByCategoryIdPage(Integer categoryId, int pageNum, int pageSize) {
         Page<GoodsCategoryAttrDetail> list = (Page<GoodsCategoryAttrDetail>) goodsCategoryAttrMapper.selectByCategoryIdPage(categoryId,pageNum,pageSize);
-        return new PageResp<>(list,this::entityToVo);
+        return new PageResp<>(list, this::entityToVo);
     }
 
 

@@ -7,9 +7,8 @@ import com.my.goods.domain.vo.GoodsItemQueryVo;
 import com.my.goods.domain.vo.GoodsItemResultVo;
 import com.my.goods.repo.ItemMapper;
 import com.my.goods.service.GoodsItemService;
-import com.my.include.common.constants.enums.RespMessageEnum;
 import com.my.include.common.domain.vo.PageResp;
-import com.my.include.common.domain.vo.RespVo;
+import com.my.include.common.utils.FeignUtils;
 import com.my.stock.feign.StockFeign;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -49,33 +48,20 @@ public class GoodsItemServiceImpl implements GoodsItemService {
             itemIds.add(item.getItemId());
 
         });
-
-        Map<Integer, Integer> map=null ;
-        try {
-            RespVo<Map<Integer, Integer>> respVo = stockFeign.selectByIds(itemIds);
-            if (respVo == null) {
-                log.error(RespMessageEnum.FEIGN_RESP_NULL.formatMsg("库存", "获取商品库存"));
-            } else if (!RespMessageEnum.SUCCESS.code.equals(respVo.getRespCode())) {
-                log.error(RespMessageEnum.FEIGN_RESP_ERROR.formatMsg("库存", "获取商品库存", respVo.getRespCode() + " " + respVo.getRespMsg()));
-            } else {
-                map = respVo.getData();
-            }
-
-        } catch (Exception e) {
-            log.error(RespMessageEnum.FEIGN_INVOKE_ERROR.formatMsg("库存", "获取商品库存", e.getMessage()));
-        }
+        Map<Integer, Integer> map = FeignUtils.feignInvoke(() -> stockFeign.selectByIds(itemIds), log, "库存", "获取商品库存");
 
         if (!CollectionUtils.isEmpty(map)) {
-            for (GoodsItemResultVo resultVo:resultVos){
-              Integer stock=  map.get(resultVo.getItemId());
-              if(stock!=null){
-                  resultVo.setStock(stock);
-              }
+            for (GoodsItemResultVo resultVo : resultVos) {
+                Integer stock = map.get(resultVo.getItemId());
+                if (stock != null) {
+                    resultVo.setStock(stock);
+                }
             }
         }
 
-        return new PageResp<>((Page<Item>)itemList,resultVos);
+        return new PageResp<>((Page<Item>) itemList, resultVos);
     }
+
 
     private GoodsItemResultVo entity2ResultVo(Item item) {
         if (item == null) {
