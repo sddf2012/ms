@@ -1,5 +1,6 @@
 package com.my.goods.domain.vo;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -21,6 +22,7 @@ public class GoodsCategoryAttrSaveVo {
     private Integer attrId;
 
     @NotNull(message="属性类型不能为空")
+    @ApiModelProperty(value = "类型")
     private Integer type;
 
     @NotNull(message="是否查询属性不能为空")

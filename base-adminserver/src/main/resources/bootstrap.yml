@@ -3,17 +3,17 @@ server:
 spring:
   application:
     name: adminserver
-  cloud:
-    config:
-      name: ${spring.application.name}
-      fail-fast: true
-      username: config
-      password: config
-      profile: dev
-      label: master
-      discovery:
-        enabled: true
-        service-id: configserver
+#  cloud:
+#    config:
+#      name: ${spring.application.name}
+#      fail-fast: true
+#      username: config
+#      password: config
+#      profile: dev
+#      label: master
+#      discovery:
+#        enabled: true
+#        service-id: configserver
 
 logging:
   level:
