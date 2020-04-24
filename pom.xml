@@ -16,7 +16,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.4.RELEASE</version>
+        <version>2.2.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.my.ecommerce</groupId>
@@ -38,7 +38,7 @@
 
         <javax.validation.version>2.0.1.Final</javax.validation.version>
 
-        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
     </properties>
 
 

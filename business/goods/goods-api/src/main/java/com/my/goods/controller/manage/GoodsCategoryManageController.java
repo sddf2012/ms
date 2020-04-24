@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public class GoodsCategoryManageController {
 
     @GetMapping(value = "/searchAll")
     @ApiOperation(value = "查询全部商品分类")
-    public RespVo<List<GoodsCategoryResultVo>> searchAll() {
+    public RespVo<List<GoodsCategoryResultVo>> searchAll(HttpServletRequest request) {
         List<GoodsCategoryResultVo> list = categoryManageService.selectAllByParentId(0);
         return RespVo.buildSuccess(list);
     }
