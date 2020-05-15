@@ -15,6 +15,7 @@
         <module>user</module>
         <module>system</module>
         <module>stock</module>
+        <module>employee</module>
     </modules>
 
     <packaging>pom</packaging>
