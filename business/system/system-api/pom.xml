@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>ecommerce-system</artifactId>
+        <artifactId>system</artifactId>
         <groupId>com.my.ecommerce</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ecommerce-system-api</artifactId>
+    <artifactId>system-api</artifactId>
 
     <build>
         <plugins>
@@ -85,19 +85,19 @@
         <!--本项目模块-->
         <dependency>
             <groupId>com.my.ecommerce</groupId>
-            <artifactId>ecommerce-system-service</artifactId>
+            <artifactId>system-service</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.my.ecommerce</groupId>
-            <artifactId>ecommerce-system-vo</artifactId>
+            <artifactId>system-vo</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.my.ecommerce</groupId>
-            <artifactId>ecommerce-system-feign</artifactId>
+            <artifactId>system-feign</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

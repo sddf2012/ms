@@ -57,5 +57,3 @@ swagger:
     title: goods api
     description: 商品模块api
     version: @project.version@
-
-condition.test: 123

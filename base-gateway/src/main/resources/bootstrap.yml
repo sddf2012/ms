@@ -19,20 +19,50 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: user
+        - id: r1
           uri: lb://goods
           predicates:
-            - Path=/goods/{segmen}/**
-#            - Query=test,bar
+            - Path=/goods/manage/category/searchAll
           filters:
-            - AddRequestParameter=test,bar-{segmen}
-            - MapRequestHeader=h1,h2
+            - AddRequestParameter=test,r1
+      default-filters:
+        - name: RequestRateLimiter
+#              args:
+#                redis-rate-limiter.replenishRate: 10
+#                redis-rate-limiter.burstCapacity: 20
+#                redis-rate-limiter.requestedTokens: 1
+          args:
+            default-rate-limiter.permitPerSec: 10
+            default-rate-limiter.capacity: 20
+            default-rate-limiter.requestToken: 1
+  #        - id: r2
+#          uri: lb://goods
+#          predicates:
+#            - Path=/goods/manage/category/searchAll/**
+#          filters:
+#            - AddRequestParameter=test,r2
+#            - name: RequestRateLimiter
+#              args:
+#                redis-rate-limiter.replenishRate: 15
+#                redis-rate-limiter.burstCapacity: 30
+#                redis-rate-limiter.requestedTokens: 2
+
+  # 缓存配置
+  redis:
+    # 地址
+    host: localhost
+    # 连接端口
+    port: 6379
+    # 数据库索引（默认为0）
+    database: 0
+
 
 
 logging:
   level:
     root: info
-  file: zzz/logfile/${spring.application.name}.log
+  file:
+    path: zzz/logfile/${spring.application.name}.log
 
 management:
   endpoints:

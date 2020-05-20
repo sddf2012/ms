@@ -34,7 +34,8 @@ logging:
   level:
     root: info
     com.my.goods.repo: debug
-  file: zzz/logfile/${spring.application.name}.log
+  file:
+    path: file:zzz/logfile/${spring.application.name}.log
 
 management:
   endpoints:

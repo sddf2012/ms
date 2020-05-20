@@ -84,7 +84,7 @@
         <!--本项目模块-->
         <dependency>
             <groupId>com.my.ecommerce</groupId>
-            <artifactId>ecommerce-goods-service</artifactId>
+            <artifactId>goods-service</artifactId>
         </dependency>
     </dependencies>
 
