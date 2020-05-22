@@ -1,5 +1,5 @@
 server:
-  port: 7003
+  port: 7300
 spring:
   application:
     name: gateway

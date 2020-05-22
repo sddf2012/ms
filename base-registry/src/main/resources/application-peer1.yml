@@ -1,0 +1,29 @@
+server:
+  port: 7001
+
+spring:
+  application:
+    name: registryserver
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    hostname: peer1
+  client:
+    service-url:
+      defaultZone: http://peer1:7001/eureka,http://peer2:7002/eureka,http://peer3:7003/eureka
+    fetch-registry: true
+    register-with-eureka: true
+  server:
+    enable-self-preservation: false
+
+logging:
+  level:
+    root: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

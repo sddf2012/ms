@@ -1,28 +1,20 @@
 server:
-  port: 7001
+  port: 7002
 
 spring:
   application:
     name: registryserver
-#  cloud:
-#    config:
-#      discovery:
-#        enabled: true
-#        service-id: configserver
-#      profile: dev
-#      label: master
-#      username: config
-#      password: config
-#      fail-fast: true
+
 eureka:
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    hostname: peer2
   client:
     service-url:
-      defaultZone: http://localhost:7001/eureka
-    fetch-registry: false
-    register-with-eureka: false
+      defaultZone: http://peer1:7001/eureka,http://peer2:7002/eureka,http://peer3:7003/eureka
+    fetch-registry: true
+    register-with-eureka: true
   server:
     enable-self-preservation: false
 
