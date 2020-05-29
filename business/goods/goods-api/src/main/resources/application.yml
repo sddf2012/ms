@@ -57,3 +57,6 @@ swagger:
     title: goods api
     description: 商品模块api
     version: @project.version@
+
+#testAutoConfig:
+#  testBean: true
