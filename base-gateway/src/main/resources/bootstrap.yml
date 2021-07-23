@@ -78,13 +78,13 @@ eureka:
     service-url:
       defaultZone: http://localhost:7001/eureka
 
-hystrix:
-  command:
-    default:
-      execution:
-        timeout:
-          enabled: true
-        isolation:
-          strategy: THREAD
-          thread:
-            timeoutInMilliseconds: 1000
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        timeout:
+#          enabled: true
+#        isolation:
+#          strategy: THREAD
+#          thread:
+#            timeoutInMilliseconds: 1000

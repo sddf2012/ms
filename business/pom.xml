@@ -15,14 +15,9 @@
         <module>user</module>
         <module>system</module>
         <module>stock</module>
-        <module>employee</module>
     </modules>
 
     <packaging>pom</packaging>
-
-    <dependencies>
-    </dependencies>
-
 
     <dependencyManagement>
         <dependencies>
@@ -83,5 +78,8 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+    </dependencies>
 
 </project>

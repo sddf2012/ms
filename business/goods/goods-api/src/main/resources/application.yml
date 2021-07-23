@@ -1,4 +1,10 @@
+server:
+  port: 8002
+
 spring:
+  application:
+    name: goods
+
   # 数据库配置
   datasource:
     # ---------------基本链接信息---------------------------
@@ -60,3 +66,77 @@ swagger:
 
 #testAutoConfig:
 #  testBean: true
+#server:
+#  port: 8002
+#spring:
+#  application:
+#    name: goods
+#  cloud:
+#    config:
+#      name: ${spring.application.name}
+#      fail-fast: true
+#      username: config
+#      password: config
+#      profile: dev
+#      label: master
+#      discovery:
+#        enabled: true
+#        service-id: configserver
+#  zipkin:
+#    service:
+#      name: ${spring.application.name}
+#    sender:
+#      type: web
+#    base-url: http://localhost:9411
+#  sleuth:
+#    sampler:
+#      percentage: 1.0
+
+logging:
+  level:
+    root: info
+    com.my.goods.repo: debug
+  file:
+    path: file:zzz/logfile/${spring.application.name}.log
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+
+#ribbon:
+#  eureka:
+#    enabled: true
+#  ReadTimeout: 1000
+#  ConnectTimeout: 2000
+#  MaxAutoRetries: 1 #同一台实例最大重试次数,不包括首次调用
+#  MaxAutoRetriesNextServer: 0 #重试负载均衡其他的实例最大重试次数,不包括首次调用
+#  OkToRetryOnAllOperations: false  #是否所有操作都重试
+
+# 接口调用超时时间，默认是1秒
+#hystrix:
+#  threadpool:
+#    default:
+#      coreSize: 10 #并发执行的最大线程数，默认10
+#      maxQueueSize: 200 #BlockingQueue的最大队列数
+#      queueSizeRejectionThreshold: 150 #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+#  command:
+#    default:
+#      execution:
+#        timeout:
+#          enabled: true
+#        isolation:
+#          strategy: THREAD
+#          semaphore:
+#            maxConcurrentRequests: 1000
+#          thread:
+#            timeoutInMilliseconds: 2000

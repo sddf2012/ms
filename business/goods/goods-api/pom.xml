@@ -62,18 +62,15 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-httpclient</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-sleuth</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zipkin</artifactId>
-        </dependency>
+
 
         <!--其他依赖-->
         <dependency>
@@ -87,11 +84,6 @@
             <artifactId>goods-service</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>my.test</groupId>
-            <artifactId>testAutoConfig</artifactId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
 
 </project>
